@@ -161,171 +161,7 @@ var bombtime=90;
 function MainProg()
 	{
 	console.log("main prog: "+started);
-	if (curevent==0)
-		{
-		document.getElementById('mytimer').innerHTML="00:00:00";
-		document.getElementById('bluebutton').style.visibility="hidden";
-		document.getElementById('redbutton').style.visibility="visible";
-		document.getElementById('probar_frame').style.visibility="hidden";
-		}
-	else if (curevent==1)
-		{
-		if (but1==1)
-			{
-			// PLANTING BOMB
-			keycounter++;
-			console.log("key1 down: "+keycounter);
-			if (keycounter>6)
-				{
-				curevent=2;
-				a_planted.play();
-				curevent=3;
-				tick_timer=0;
-				a_beeps1.play();
-				keycounter=0;
-				console.log("bomb has been planted");
-				document.getElementById('bluebutton').style.visibility="visible";
-				document.getElementById('redbutton').style.visibility="hidden";
-				document.getElementById('probar_frame').style.visibility="hidden";
-				}
-			document.getElementById('probar_frame').style.visibility="visible";
-			document.getElementById('probar').style.width=(keycounter*50)+"px";
-			document.getElementById('probar').style.backgroundColor="red";
-			}
-		}
-	else if (curevent==3)
-		{
-		document.getElementById('probar_frame').style.visibility="hidden";
-		tick_timer++;
-		document.getElementById('mytimer').innerHTML="00:"+(bombtime-tick_timer)+":00";
-		console.log("tick1: "+tick_timer);
-		de_break=0;
-		if (tick_timer>(bombtime/3))
-			{
-			curevent=4;
-			a_beeps2.play();
-			}
-		}
-	else if (curevent==4)
-		{
-					document.getElementById('probar_frame').style.visibility="hidden";
-		de_break=0;
-		tick_timer++;
-		console.log("tick2: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
-		if (tick_timer>((bombtime/3)*2))
-			{
-			curevent=5;
-			a_beeps3.play();
-			}
-		}
-	else if (curevent==5)
-		{
-					document.getElementById('probar_frame').style.visibility="hidden";
-		de_break=0;
-		tick_timer++;
-		console.log("tick3: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
-		if (tick_timer>(bombtime-6))
-			{
-			curevent=6;
-			a_beeps4.play();
-			// super fast beeps
-			}
-		}
-
-	else if (curevent==6)
-		{
-					document.getElementById('probar_frame').style.visibility="hidden";
-		de_break=0;
-		tick_timer++;
-		console.log("tick4: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
-		if (tick_timer>(bombtime-1))
-			{
-			curevent=7;
-			a_boom.play();
-			// boom
-			console.log("boom: "+tick_timer);
-			}
-		}
-	else if (curevent==7)
-		{
-		tick_timer++;
-		console.log("tick when booming: "+tick_timer);
-		if (tick_timer>(bombtime+3))
-			{
-			curevent=11;
-			console.log("Terrorist win: ");
-			url="http://airsoft.ge/bombapp/bomb.php?curevent="+11;
-			console.log("bombupdate: "+url);
-			gamehttp.open('GET',url,true);
-			gamehttp.send(null);
-
-			a_t_win.play();
-			// terrorists win
-			}
-		}
-	else if (curevent==8)
-		{
-		// DEFUSING
-		keycounter++;
-		tick_timer++;
-		console.log("defusing: "+keycounter+" ticker: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
-
-
-		document.getElementById('probar_frame').style.visibility="visible";
-		document.getElementById('probar').style.width=(keycounter*40)+"px";
-		document.getElementById('probar').style.backgroundColor="blue";
-
-		if (tick_timer>(bombtime-1)  && de_break==6)
-			{
-			curevent=7;
-			a_boom.play();
-			de_break=0;
-			// boom
-			console.log("ne uspel, boom: "+tick_timer);
-			}
-		else if (tick_timer>(bombtime-6) && de_break==5)
-			{
-			de_break=6;
-			a_beeps4.play();
-			}
-		else if (tick_timer>((bombtime/3)*2) && de_break==4)
-			{
-			de_break=5;
-			a_beeps3.play();
-			}
-		else if (tick_timer>(bombtime/3) && de_break==3)
-			{
-			de_break=4;
-			a_beeps2.play();
-			}
-		
-		if (keycounter>8)
-			{
-			console.log("defused");
-			document.getElementById('probar_frame').style.visibility="hidden";
-			curevent=9;
-			tick_timer=0;
-			a_defused.play();
-			de_break=0;
-			// defused
-			}
-		}
-	else if (curevent==9)
-		{
-		tick_timer++;
-		console.log("after defused: "+tick_timer);
-		if (tick_timer>3)
-			{
-			curevent=0;
-			a_ct_win.play();
-			console.log("Counter-Terrorist Win");
-			// counter-terrorist win
-			}
-		}
+	
 
 	url="http://airsoft.ge/bombapp/bomb.php?curevent="+curevent;
 	console.log("bombupdate: "+url);
@@ -349,6 +185,14 @@ function update_data()
 		if (mr!="")
 			{
 			console.log("data received from server: "+mr);
+
+			a=new Array();
+
+			a=mr.split("|");
+			curevent=a[0];
+			time_left=a[1];
+			ter_stat=a[2];
+			cs_stat=[3];
 
 			}
 		}
@@ -475,6 +319,11 @@ function ter_choose()
 	document.getElementById("terdiv").style.visibility="visible";
 	document.getElementById("csdiv").style.visibility="hidden";
 	
+	url="http://airsoft.ge/refapp/ready.php?ter_ready=1";
+	console.log("ter_ready: "+url);
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
+
 	}
 
 	
@@ -489,9 +338,12 @@ function cs_choose()
 	
 	document.getElementById("terdiv").style.visibility="hidden";
 	document.getElementById("csdiv").style.visibility="visible";
-	
+	url="http://airsoft.ge/refapp/ready.php?cs_ready=1";
+	console.log("cs_ready: "+url);
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
 	}
-
+var time_left=0;
 //	setTimeout("MainProg();",500);
     </script>
   </head>
