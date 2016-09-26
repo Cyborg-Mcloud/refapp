@@ -213,6 +213,7 @@ function update_data()
 				document.getElementById("cs_readybut").style.visibility="hidden";				document.getElementById("cs_stopbut").style.visibility="visible";
 				}
 
+			document.getElementById("round_time_left").innerHTML="რაუნდის დრო: "+(time_left/2);
 
 			}
 		}
@@ -367,6 +368,17 @@ function ter_ready_down()
 
 }
 
+function ter_stop_down()
+{
+
+	url="http://airsoft.ge/refapp/ready.php?ter_ready=0";
+	console.log("ter_ready: "+url);
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
+
+}
+
+
 function cs_ready_down()
 {
 	url="http://airsoft.ge/refapp/ready.php?cs_ready=1";
@@ -374,6 +386,18 @@ function cs_ready_down()
 	gamehttp.open('GET',url,true);
 	gamehttp.send(null);
 }
+
+
+function cs_stop_down()
+{
+
+	url="http://airsoft.ge/refapp/ready.php?cs_ready=0";
+	console.log("ter_ready: "+url);
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
+
+}
+
 
 var time_left=0;
 //	setTimeout("MainProg();",500);
@@ -406,13 +430,14 @@ var time_left=0;
 
 	<br><br>
 	<center style='font-weight:bold; color:red;'>Counter-Terrorists</center><br>
-	<a href='Javascript: ter_ready_down();' id="ter_readybut" style='display:block; float:left; width:120px; height:50px; background-color:green; color:white; padding:10px;'>READY</a>
+	<a href='Javascript: cs_ready_down();' id="cs_readybut" style='display:block; float:left; width:120px; height:50px; background-color:green; color:white; padding:10px;'>READY</a>
 		
-	<a href='Javascript: ter_stop_down();' id="ter_stopbut" style='display:block; float:right; width:120px; height:50px; background-color:red; color:white; padding:10px; visibility:hidden;'>STOP</a>
+	<a href='Javascript: cs_stop_down();' id="cs_stopbut" style='display:block; float:right; width:120px; height:50px; background-color:red; color:white; padding:10px; visibility:hidden;'>STOP</a>
 </div>
 		
 		<!-- MAIN MAP -->
 
+<div id='round_time_left' style='color:white; position:fixed; left:10px; right:10px;'></div>
 	<!--<div id='mouser' name='mouser' style='position:fixed; left:0px; top:0px; width:355px; height:500px; z-index:250;  ' ontouchstart="mdown(event);" ontouchend="mup(event);"  ontouchmove="getmousecoord(event);" ></div>-->
 
 
