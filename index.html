@@ -194,6 +194,26 @@ function update_data()
 			ter_stat=a[2];
 			cs_stat=[3];
 
+			if (ter_stat==0)
+				{
+				document.getElementById("ter_readybut").style.visibility="visible";				document.getElementById("ter_stopbut").style.visibility="hidden";
+				}
+			else 
+				{
+				document.getElementById("ter_readybut").style.visibility="hidden";				document.getElementById("ter_stopbut").style.visibility="visible";
+				}
+
+
+			if (cs_stat==0)
+				{
+				document.getElementById("cs_readybut").style.visibility="visible";				document.getElementById("cs_stopbut").style.visibility="hidden";
+				}
+			else 
+				{
+				document.getElementById("cs_readybut").style.visibility="hidden";				document.getElementById("cs_stopbut").style.visibility="visible";
+				}
+
+
 			}
 		}
 	}
@@ -319,10 +339,6 @@ function ter_choose()
 	document.getElementById("terdiv").style.visibility="visible";
 	document.getElementById("csdiv").style.visibility="hidden";
 	
-	url="http://airsoft.ge/refapp/ready.php?ter_ready=1";
-	console.log("ter_ready: "+url);
-	gamehttp.open('GET',url,true);
-	gamehttp.send(null);
 
 	}
 
@@ -338,11 +354,27 @@ function cs_choose()
 	
 	document.getElementById("terdiv").style.visibility="hidden";
 	document.getElementById("csdiv").style.visibility="visible";
+
+	}
+
+function ter_ready_down()
+{
+
+	url="http://airsoft.ge/refapp/ready.php?ter_ready=1";
+	console.log("ter_ready: "+url);
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
+
+}
+
+function cs_ready_down()
+{
 	url="http://airsoft.ge/refapp/ready.php?cs_ready=1";
 	console.log("cs_ready: "+url);
 	gamehttp.open('GET',url,true);
 	gamehttp.send(null);
-	}
+}
+
 var time_left=0;
 //	setTimeout("MainProg();",500);
     </script>
@@ -362,9 +394,9 @@ var time_left=0;
 
 	<br><br>
 	<center style='font-weight:bold; color:red;'>Terrorists</center><br>
-	<a href='Javascript: ter_ready_down();' id="readybut" style='display:block; float:left; width:120px; height:50px; background-color:green; color:white; padding:10px;'>READY</a>
+	<a href='Javascript: ter_ready_down();' id="ter_readybut" style='display:block; float:left; width:120px; height:50px; background-color:green; color:white; padding:10px;'>READY</a>
 		
-	<a href='Javascript: ter_stop_down();' id="stopbut" style='display:block; float:right; width:120px; height:50px; background-color:red; color:white; padding:10px; visibility:hidden;'>STOP</a>
+	<a href='Javascript: ter_stop_down();' id="ter_stopbut" style='display:block; float:right; width:120px; height:50px; background-color:red; color:white; padding:10px; visibility:hidden;'>STOP</a>
 </div>
 
 	
@@ -374,9 +406,9 @@ var time_left=0;
 
 	<br><br>
 	<center style='font-weight:bold; color:red;'>Counter-Terrorists</center><br>
-	<a href='Javascript: ter_ready_down();' id="readybut" style='display:block; float:left; width:120px; height:50px; background-color:green; color:white; padding:10px;'>READY</a>
+	<a href='Javascript: ter_ready_down();' id="ter_readybut" style='display:block; float:left; width:120px; height:50px; background-color:green; color:white; padding:10px;'>READY</a>
 		
-	<a href='Javascript: ter_stop_down();' id="stopbut" style='display:block; float:right; width:120px; height:50px; background-color:red; color:white; padding:10px; visibility:hidden;'>STOP</a>
+	<a href='Javascript: ter_stop_down();' id="ter_stopbut" style='display:block; float:right; width:120px; height:50px; background-color:red; color:white; padding:10px; visibility:hidden;'>STOP</a>
 </div>
 		
 		<!-- MAIN MAP -->
