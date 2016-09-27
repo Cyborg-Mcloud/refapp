@@ -163,17 +163,12 @@ function MainProg()
 	console.log("main prog: "+started);
 	
 
-	url="http://airsoft.ge/bombapp/bomb.php?curevent="+curevent;
-	console.log("bombupdate: "+url);
+	url="http://airsoft.ge/refapp/refapp/ready.php";
+	console.log("refapp: "+url);
 	gamehttp.open('GET',url,true);
 	gamehttp.send(null);
 
-	if (curevent==11)
-		{
-		curevent=0;
-		}
-
-	//setTimeout("MainProg();",500);
+	setTimeout("MainProg();",1000);
 	}
 
 var ter_stat=0;
@@ -401,7 +396,7 @@ function cs_stop_down()
 
 
 var time_left=0;
-//	setTimeout("MainProg();",500);
+setTimeout("MainProg();",1000);
     </script>
   </head>
   <style>
