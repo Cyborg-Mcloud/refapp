@@ -192,24 +192,26 @@ function update_data()
 
 			if (ter_stat=="0")
 				{
-				document.getElementById("ter_readybut").style.visibility="visible";				document.getElementById("ter_stopbut").style.visibility="hidden";
+				document.getElementById("ter_readybut").style.display="inline";				
+				document.getElementById("ter_stopbut").style.display="none";
 				}
 			else if (ter_stat=="1")
 				{
-				document.getElementById("ter_readybut").style.visibility="hidden";				document.getElementById("ter_stopbut").style.visibility="visible";
+				document.getElementById("ter_readybut").style.display="none";				
+				document.getElementById("ter_stopbut").style.display="inline";
 				}
 
 
 			if (cs_stat=="0")
 				{
-				document.getElementById("cs_readybut").style.visibility="visible";				
-				document.getElementById("cs_stopbut").style.visibility="hidden";
+				document.getElementById("cs_readybut").style.display="inline";				
+				document.getElementById("cs_stopbut").style.display="none";
 				console.log("cs not ready");
 				}
 			else if (cs_stat=="1")
 				{
-				document.getElementById("cs_readybut").style.visibility="hidden";				
-				document.getElementById("cs_stopbut").style.visibility="visible";
+				document.getElementById("cs_readybut").style.display="none";				
+				document.getElementById("cs_stopbut").style.display="inline";
 				console.log("cs ready");
 				}
 		
@@ -419,7 +421,7 @@ setTimeout("MainProg();",1000);
 
 <a href='Javascript: cs_choose();' id="cschoosebut" style='text-align:center;  color:white; display:block; position: absolute; left:170px; top:0px; width:150px; height:30px; border:1px solid gray; padding:10px; font-size:14px; '>Counter-Terrorists</a>
 
-<div id='terdiv' style='width:100%; border:1px solid red;  position:absolute; left:0px; top:60px; background-color:white;'>
+<div id='terdiv' style='width:100%; border:1px solid red; position:absolute; left:0px; top:60px; background-color:white;'>
 
 	<br><br>
 	<center style='font-weight:bold; color:red;'>Terrorists</center><br>
@@ -431,7 +433,7 @@ setTimeout("MainProg();",1000);
 	
 	
 		
-<div id='csdiv' style='width:100%; border:1px solid red; position:absolute; left:0px; top:60px; visibility:hidden;  background-color:white;'>
+<div id='csdiv' style='width:100%; border:1px solid red; position:absolute; left:0px; top:60px; visibility:hidden; background-color:white;'>
 
 	<br><br>
 	<center style='font-weight:bold; color:red;'>Counter-Terrorists</center><br>
