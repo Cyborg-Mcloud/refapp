@@ -163,7 +163,7 @@ function MainProg()
 	console.log("main prog: "+started);
 	
 
-	url="http://airsoft.ge/refapp/refapp/ready.php";
+	url="http://airsoft.ge/refapp/ready.php";
 	console.log("refapp: "+url);
 	gamehttp.open('GET',url,true);
 	gamehttp.send(null);
@@ -202,11 +202,15 @@ function update_data()
 
 			if (cs_stat=="0")
 				{
-				document.getElementById("cs_readybut").style.visibility="visible";				document.getElementById("cs_stopbut").style.visibility="hidden";
+				document.getElementById("cs_readybut").style.visibility="visible";				
+				document.getElementById("cs_stopbut").style.visibility="hidden";
+				console.log("cs not ready");
 				}
 			else if (cs_stat=="1")
 				{
-				document.getElementById("cs_readybut").style.visibility="hidden";				document.getElementById("cs_stopbut").style.visibility="visible";
+				document.getElementById("cs_readybut").style.visibility="hidden";				
+				document.getElementById("cs_stopbut").style.visibility="visible";
+								console.log("cs ready");
 				}
 
 			document.getElementById("round_time_left").innerHTML="რაუნდის დრო: "+(time_left/2);
